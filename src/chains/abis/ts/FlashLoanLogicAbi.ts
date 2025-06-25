@@ -1,0 +1,58 @@
+/**
+ * Этот файл сгенерирован автоматически (скриптом generateAbisTs.js).
+ * Не редактируйте его вручную — при изменении ABI запустите скрипт заново.
+ *
+ * ABI контракта: FlashLoanLogic
+ */
+
+export const FlashLoanLogicAbi = [
+  {
+    anonymous: false,
+    inputs: [
+      {
+        indexed: true,
+        internalType: 'address',
+        name: 'target',
+        type: 'address'
+      },
+      {
+        indexed: false,
+        internalType: 'address',
+        name: 'initiator',
+        type: 'address'
+      },
+      {
+        indexed: true,
+        internalType: 'address',
+        name: 'asset',
+        type: 'address'
+      },
+      {
+        indexed: false,
+        internalType: 'uint256',
+        name: 'amount',
+        type: 'uint256'
+      },
+      {
+        indexed: false,
+        internalType: 'enum DataTypes.InterestRateMode',
+        name: 'interestRateMode',
+        type: 'uint8'
+      },
+      {
+        indexed: false,
+        internalType: 'uint256',
+        name: 'premium',
+        type: 'uint256'
+      },
+      {
+        indexed: true,
+        internalType: 'uint16',
+        name: 'referralCode',
+        type: 'uint16'
+      }
+    ],
+    name: 'FlashLoan',
+    type: 'event'
+  }
+] as const;

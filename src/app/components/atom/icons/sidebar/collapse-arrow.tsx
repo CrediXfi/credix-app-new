@@ -1,0 +1,18 @@
+import * as React from "react"
+import { SVGProps } from "react"
+export const CollapseArrow = (props: SVGProps<SVGSVGElement>) => (
+    <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width={24}
+        height={24}
+        fill="none"
+        {...props}
+    >
+        <path
+            fill="#fff"
+            fillRule="evenodd"
+            d="M8.293 12.707a1 1 0 0 1 0-1.414l5.657-5.657a1 1 0 1 1 1.414 1.414L10.414 12l4.95 4.95a1 1 0 0 1-1.414 1.414l-5.657-5.657Z"
+            clipRule="evenodd"
+        />
+    </svg>
+)
