@@ -266,7 +266,9 @@ export function MarketAssetsTable() {
           <h6 className="text-white text-base font-normal leading-6 opacity-75">
             Market Asset
           </h6>
-          <ToolTipIcon className="size-[18px] text-white opacity-75 cursor-pointer" />
+          <button title="Assets Availabe in the market">
+            <ToolTipIcon className="size-[18px] text-white opacity-75 cursor-pointer" />
+          </button>
         </span>
         <button className="text-white text-xs font-normal leading-6 bg-[#2B292D] py-1.5 px-3 rounded opacity-75 hover:opacity-100">
           Edit Table

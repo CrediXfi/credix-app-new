@@ -31,8 +31,9 @@ type CardMarket = {
 const marketData: CardMarket[] = [
   {
     id: 1,
-    type: "Core",
-    name: "Credix Core",
+    type: "CORE",
+    // name: "Credix Core",
+    name: "Sonic Core",
     marketSize: "2.6",
     marketSizeUnit: "Mn",
     tvl: "969.71",
@@ -40,7 +41,8 @@ const marketData: CardMarket[] = [
     totalBorrow: "969.71",
     totalBorrowUnit: "K",
     description:
-      "Core lending market for the CredixEVM. Focused on growing the HyperLiquid ecosystem.",
+      // "Core lending market for the CredixEVM. Focused on growing the HyperLiquid ecosystem.",
+      "Core lending and borrowing market on Sonic chain. Focused on growing the Sonic ecosystem.",
   },
 ];
 

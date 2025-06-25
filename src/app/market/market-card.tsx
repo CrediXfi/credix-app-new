@@ -5,17 +5,17 @@ import { useMarkets } from "@/lib/hooks/use-markets";
 
 function usdCompact(n: number) {
   const abs = Math.abs(n);
-  if (abs >= 1e9)  return `$${(n / 1e9).toFixed(2)}Bn`;
-  if (abs >= 1e6)  return `$${(n / 1e6).toFixed(2)}Mn`;
-  if (abs >= 1e3)  return `$${(n / 1e3).toFixed(2)}K`;
+  if (abs >= 1e9) return `$${(n / 1e9).toFixed(2)}Bn`;
+  if (abs >= 1e6) return `$${(n / 1e6).toFixed(2)}Mn`;
+  if (abs >= 1e3) return `$${(n / 1e3).toFixed(2)}K`;
   return `$${n.toFixed(2)}`;
 }
 
 /* fallback */
 const marketData = [
   { label: "Total Market Size", value: "$0" },
-  { label: "Total Available",   value: "$0" },
-  { label: "Total Borrowed",    value: "$0" },
+  { label: "Total Available", value: "$0" },
+  { label: "Total Borrowed", value: "$0" },
 ];
 
 export function MarketCard() {
@@ -37,8 +37,8 @@ export function MarketCard() {
 
     return [
       { label: "Total Market Size", value: usdCompact(totalSize) },
-      { label: "Total Available",   value: usdCompact(totals.available) },
-      { label: "Total Borrowed",    value: usdCompact(totals.borrow) },
+      { label: "Total Available", value: usdCompact(totals.available) },
+      { label: "Total Borrowed", value: usdCompact(totals.borrow) },
     ];
   }, [data]);
 
@@ -49,7 +49,7 @@ export function MarketCard() {
           Markets
         </h5>
         <p className="text-white opacity-75 text-base font-light leading-6 mt-1.5">
-          All available markets on CX
+          All available markets on different chains
         </p>
       </div>
 

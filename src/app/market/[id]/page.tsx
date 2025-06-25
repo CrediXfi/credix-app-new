@@ -20,9 +20,9 @@ const demoMarkets = [
   {
     id: "1",
     chainIcon: "/loop.png",
-    marketName: "Credix Core",
+    marketName: "Sonic Core",
     description:
-      "Core lending market for the CredixEVM. Focused on growing the HyperLiquid ecosystem.",
+      "Core lending and borrowing market on Sonic chain. Focused on growing the Sonic ecosystem.",
   },
 ];
 
