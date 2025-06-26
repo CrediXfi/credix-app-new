@@ -83,7 +83,7 @@ export function EarnTable() {
     {
       id: "marketName",
       header: "Market Name",
-      cell: () => <p className="text-white text-sm">Credix Main</p>,
+      cell: () => <p className="text-white text-sm">Sonic Core</p>,
     },
     {
       accessorKey: "suppliedUsd",

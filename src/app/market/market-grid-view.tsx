@@ -96,7 +96,7 @@ export function MarketGridView() {
               </p>
               <Link href={`/market/${market.id}`}>
                 <div className="flex items-center gap-2 cursor-pointer text-white text-xs font-light leading-6">
-                  View market
+                  View
                   <RightAngleIcon className="size-6 text-white" />
                 </div>
               </Link>

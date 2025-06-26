@@ -1,7 +1,7 @@
 "use client";
 import React from "react";
 
-const marketOptions = ["Credix Main"];
+const marketOptions = ["Sonic Core"];
 
 type Props = {
   isOpen: boolean;

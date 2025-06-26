@@ -3,17 +3,19 @@ import { RightArrowIcon } from "@/app/components/atom/icons/home/right-arrow";
 
 const fundCards = [
   {
-    title: "Lend Funds",
+    title: "Lend & Borrow",
     description:
-      "Maximize returns through lending yields and protocol incentives. Every deposit earns both interest and valuable reward points",
-    action: "Lends Funds Now",
+      // "Maximize returns through lending yields and protocol incentives. Every deposit earns both interest and valuable reward points",
+      "Lenders lend assets and earn interest, points and incentives. Borrowers borrow assets at efficient interest rates to do carry trades and looping strategies.",
+    action: "Lend & Borrow Now",
     icon: <HomeLogo className="size-[100px]" idPrefix="first" />,
   },
   {
-    title: "Borrow Funds",
+    title: "Stake",
     description:
-      "Leverage your assets intelligently with flexible borrowing Keep earning rewards while accessing the liquidity you need.",
-    action: "Borrow Funds Now",
+      // "Leverage your assets intelligently with flexible borrowing Keep earning rewards while accessing the liquidity you need.",
+      "Stake CX or cLP (CX/USDC LP) for veCX. The protocol shares revenue, token emissions and potential airdrops from other protocols with veCX holders",
+    action: "Coming Soon...",
     icon: <HomeLogo className="size-[100px]" idPrefix="second" />,
   },
 ];
@@ -31,10 +33,19 @@ export function FundsCard() {
           <p className="text-white text-base font-light leading-6 opacity-75 mt-1.5">
             {card.description}
           </p>
-          <div className="mt-4 flex items-center gap-1.5 cursor-pointer text-white hover:text-gray-300 ">
-            <h6 className="text-sm font-semibold leading-6">{card.action}</h6>
-            <RightArrowIcon className="size-6" />
-          </div>
+          {index === 0 ?
+            <a
+              href="/market"
+              className="mt-4 flex items-center gap-1.5 cursor-pointer text-white hover:text-gray-300 "
+            >
+              <h6 className="text-sm font-semibold leading-6">{card.action}</h6>
+              <RightArrowIcon className="size-6" />
+            </a>
+            :
+            <div className="mt-4 flex items-center gap-1.5 cursor-pointer text-white hover:text-gray-300 ">
+              <h6 className="text-sm font-semibold leading-6">{card.action}</h6>
+            </div>
+          }
         </div>
       ))}
     </div>

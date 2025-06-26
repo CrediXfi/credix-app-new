@@ -37,7 +37,7 @@ const demoMarkets: TableRow[] = [
   {
     id: "1",
     chainIcon: "/loop.png",
-    marketName: "Credix Core",
+    marketName: "Sonic Core",
     marketSize: "$1.2Bn",
     totalAvailable: "$510.25M",
     totalBorrow: "$320.89M",
@@ -101,9 +101,9 @@ export function MarketTable() {
         cell: ({ row }) => (
           <Link
             href={`/market/${row.original.id}`}
-            className="bg-[#8748FF] hover:bg-purple-700 text-white text-sm px-2.5 py-[2px] rounded-sm transition min-w-28 inline-block text-center"
+            className="bg-[#8748FF] hover:bg-purple-700 text-white text-sm px-2.5 py-[2px] rounded-sm transition inline-block text-center"
           >
-            View Market
+            View
           </Link>
         ),
       },
