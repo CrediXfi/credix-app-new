@@ -60,7 +60,7 @@ export const Borrow: FC<BorrowProps> = ({
       onSubmit={handleSubmit}
       className="rounded-md border border-[#855ECA] bg-white/5 backdrop-blur-[25px] py-1.5 px-3"
     >
-      <p className="mt-4 flex items-center gap-1 text-sm font-light text-white">
+      <p className="mt-4 mb-2 flex items-center gap-1 text-sm font-light text-white">
         Amount
         <ToolTipIcon className="size-4" />
       </p>
@@ -74,7 +74,7 @@ export const Borrow: FC<BorrowProps> = ({
 
       <div className="mt-2 flex items-center justify-between">
         <p className="text-xs font-light text-[#935ABD]">
-          Wallet balance&nbsp;
+          Available&nbsp;
           {walletBalance.toLocaleString(undefined, { maximumFractionDigits: 4 })}{" "}
           {symbol}
         </p>
@@ -93,11 +93,10 @@ export const Borrow: FC<BorrowProps> = ({
             Half
           </span>
           <span
-            onClick={() =>
-              setAmount(
-                String(walletBalance.toFixed(decimals > 4 ? 4 : decimals)),
-              )
-            }
+            onClick={() => {
+              const max = (Math.floor(walletBalance * 10 ** (decimals > 4 ? 4 : decimals)) / 10 ** (decimals > 4 ? 4 : decimals)).toString();
+              setAmount(max);
+            }}
             className="cursor-pointer rounded-[2px] bg-[#935ABD] py-1 px-2 text-xs font-medium text-white"
           >
             MAX
@@ -143,7 +142,7 @@ export const Borrow: FC<BorrowProps> = ({
       <button
         type="submit"
         disabled={isPending || !amount}
-        className="mb-2 flex w-full items-center justify-center rounded bg-[#8748FF] py-2 text-lg font-semibold text-white disabled:opacity-50"
+        className="mb-2 mt-4 flex w-full items-center justify-center rounded bg-[#8748FF] py-2 text-lg font-semibold text-white disabled:opacity-50"
       >
         {isPending ? "Borrowing…" : "Borrow"}
       </button>

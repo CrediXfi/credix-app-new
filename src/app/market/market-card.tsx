@@ -26,14 +26,15 @@ export function MarketCard() {
 
     const totals = data.reduce(
       (acc, m) => {
-        acc.available += m.availableLiquidity;
-        acc.borrow += m.totalPrincipalStableDebt + m.totalScaledVariableDebt;
+        const price = m.underlyingPrice;
+        acc.available += (m.availableLiquidity * price);
+        acc.borrow += ((m.totalPrincipalStableDebt + m.totalScaledVariableDebt) * price);
         return acc;
       },
       { available: 0, borrow: 0 }
     );
 
-    const totalSize = totals.available + totals.borrow;
+    const totalSize = totals.available + totals.borrow; // TODO: Getting the actual value in USD
 
     return [
       { label: "Total Market Size", value: usdCompact(totalSize) },

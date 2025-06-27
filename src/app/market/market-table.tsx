@@ -52,8 +52,9 @@ export function MarketTable() {
 
     const totals = data.reduce(
       (acc, r) => {
-        acc.available += r.availableLiquidity;
-        acc.borrow += r.totalPrincipalStableDebt + r.totalScaledVariableDebt;
+        const price = r.underlyingPrice;
+        acc.available += (r.availableLiquidity * price);
+        acc.borrow += ((r.totalPrincipalStableDebt + r.totalScaledVariableDebt) * price);
         return acc;
       },
       { available: 0, borrow: 0 }

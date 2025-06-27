@@ -28,8 +28,9 @@ export function AmountCard() {
       const available = m.availableLiquidity /* ★ * m.underlyingPrice */;
       const borrowed =
         (m.totalPrincipalStableDebt + m.totalScaledVariableDebt) /* ★ * m.underlyingPrice */;
-      acc.available += available;
-      acc.borrow += borrowed;
+      const price = m.underlyingPrice;
+      acc.available += available * price;
+      acc.borrow += borrowed * price;
       return acc;
     },
     { available: 0, borrow: 0 }

@@ -38,8 +38,9 @@ export default function MarketDetailPage() {
 
     return data.reduce(
       (acc, r) => {
-        acc.totalAvailable += r.availableLiquidity;
-        acc.totalBorrow += r.totalPrincipalStableDebt + r.totalScaledVariableDebt;
+        const price = r.underlyingPrice;
+        acc.totalAvailable += (r.availableLiquidity * price);
+        acc.totalBorrow += ((r.totalPrincipalStableDebt + r.totalScaledVariableDebt) * price);
         return acc;
       },
       { totalAvailable: 0, totalBorrow: 0 }

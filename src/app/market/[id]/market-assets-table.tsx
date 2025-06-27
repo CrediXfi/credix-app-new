@@ -63,7 +63,7 @@ export function MarketAssetsTable() {
     return data.map((r, idx) => {
       const avail = Number(r.availableLiquidity);
       const price = r.underlyingPrice;
-      const suppliedUsd = avail * price;
+      const suppliedUsd = avail * price; // TODO: Getting the actual value in USD (for the table and not the heading)
 
       const totalBorrow = r.totalPrincipalStableDebt + r.totalScaledVariableDebt;
       return {
@@ -142,9 +142,11 @@ export function MarketAssetsTable() {
                   <>
                     {parts[1] && (
                       <span className="text-[#606060] opacity-75">
+                        {/* TODO: Dollar symbol */}
                         {parts[1]}
                       </span>
                     )}
+                    {/* TODO: The dollar equivalent of supplied assets */}
                     {parts[2]}
                     {parts[3] && (
                       <span className="text-[#606060] opacity-75">

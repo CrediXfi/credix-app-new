@@ -18,13 +18,15 @@ const USDXLInput: FC<USDXLInputProps> = ({
 }) => {
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     const v = e.target.value;
-    if (/^\d*\.?\d*$/.test(v) && parseFloat(v || "0") <= max) {
+
+    // Allow only numbers and a single decimal point
+    if (/^\d*\.?\d*$/.test(v)) {
       onChange(v);
     }
   };
 
-  const parsed = parseFloat(value || "0");
-  const formatted = isNaN(parsed) ? "0.00" : parsed.toFixed(2);
+  const parsed = parseFloat(value);
+  const formatted = !value || isNaN(parsed) ? "0.00" : parsed.toFixed(2);
 
   return (
     <div className="grid grid-cols-7 justify-between border border-[#606060] rounded py-[7px] px-[13px] bg-[rgba(255,255,255,0.04)] w-full text-white">

@@ -98,9 +98,10 @@ export const BorrowModal: FC<BorrowModalProps> = ({
             </button>
             <button
               type="button"
-              onClick={() =>
-                setAmount(walletBalance.toFixed(decimals > 4 ? 4 : decimals))
-              }
+              onClick={() => {
+                const max = (Math.floor(walletBalance * 10 ** (decimals > 4 ? 4 : decimals)) / 10 ** (decimals > 4 ? 4 : decimals)).toString();
+                setAmount(max);
+              }}
               className="cursor-pointer rounded-[2px] bg-[#935ABD] py-1 px-2 text-xs font-medium"
             >
               MAX

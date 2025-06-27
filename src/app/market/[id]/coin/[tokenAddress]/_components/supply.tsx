@@ -79,7 +79,7 @@ export const Supply: FC<SupplyProps> = ({
       onSubmit={handleSubmit}
       className="rounded-md border border-[#855ECA] bg-white/5 backdrop-blur-[25px] py-1.5 px-3"
     >
-      <p className="text-white opacity-75 text-base font-light leading-6">
+      {/* <p className="text-white opacity-75 text-base font-light leading-6">
         You are entering Isolation mode…{" "}
         <a
           href="https://discord.com"
@@ -89,9 +89,9 @@ export const Supply: FC<SupplyProps> = ({
         >
           Discord
         </a>
-      </p>
+      </p> */}
 
-      <p className="mt-4 flex items-center gap-1 text-sm font-light text-white">
+      <p className="mt-4 mb-2 flex items-center gap-1 text-sm font-light text-white">
         Amount
         <ToolTipIcon className="size-4" />
       </p>
@@ -122,7 +122,7 @@ export const Supply: FC<SupplyProps> = ({
           </span>
           <span
             onClick={() => {
-              const max = String(walletBalance.toFixed(decimals > 4 ? 4 : decimals));
+              const max = (Math.floor(walletBalance * 10 ** (decimals > 4 ? 4 : decimals)) / 10 ** (decimals > 4 ? 4 : decimals)).toString();
               setAmount(max);
             }}
             className="cursor-pointer rounded-[2px] bg-[#935ABD] py-1 px-2 text-xs font-medium text-white"
@@ -144,7 +144,7 @@ export const Supply: FC<SupplyProps> = ({
       <button
         type="submit"
         disabled={isPending || !amount}
-        className="mb-2 flex w-full items-center justify-center rounded bg-[#8748FF] py-2 text-lg font-semibold text-white disabled:opacity-50"
+        className="mb-2 mt-4 flex w-full items-center justify-center rounded bg-[#8748FF] py-2 text-lg font-semibold text-white disabled:opacity-50"
       >
         {isPending ? "Supplying…" : "Supply"}
       </button>

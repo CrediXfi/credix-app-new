@@ -47,8 +47,11 @@ if (et || em || ep) {
   if (!market) return <div>Market not found</div>;
 
   const totalBorrow = market.totalPrincipalStableDebt + market.totalScaledVariableDebt;
-  const reserveSize = market.availableLiquidity + totalBorrow;
-  const utilizationRate = (totalBorrow / (reserveSize || 1)) * 100;
+  const price = market.underlyingPrice;
+  const availableLiquidity = (market.availableLiquidity * price);
+  const totalBorrowed = (totalBorrow * price);
+  const reserveSize = availableLiquidity + totalBorrowed;
+  const utilizationRate = (totalBorrowed / (reserveSize || 1)) * 100;
 
   const fmt = (n: number) => n.toLocaleString(undefined, { maximumFractionDigits: 2 });
 
@@ -60,10 +63,10 @@ if (et || em || ep) {
         tokenName={tokenData.name}
         tokenDecimals={tokenData.decimals}
         reserveSize={fmt(reserveSize)}
-        availableLiquidity={fmt(market.availableLiquidity)}
+        availableLiquidity={fmt(availableLiquidity)}
         utilizationRate={utilizationRate.toFixed(2)}
         oraclePrice={market.underlyingPrice.toFixed(2)}
-        totalBorrowed={fmt(totalBorrow)}
+        totalBorrowed={fmt(totalBorrowed)}
         supplyCap={fmt(poolData.supplyCap)}
         supplyApy={market.supplyApy.toFixed(2)}
         startIsolatedDebt={fmt(poolData.debtCeiling)}
