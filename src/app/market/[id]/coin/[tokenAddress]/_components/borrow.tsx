@@ -7,13 +7,15 @@ import { FuelIcon } from "@/app/components/atom/icons/market/fuel";
 import { ToolTipIcon } from "@/app/components/atom/icons/market/tooltip";
 import USDXLInput from "../../../../../components/input";
 import { useBorrow } from "@/lib/hooks/use-borrow";
-import { useMaxBorrowAmount } from "@/lib/hooks/useMaxBorrowAmount";
+import { useMaxBorrowAmount } from "@/lib/hooks/use-max-borrow-amount";
 
 export interface BorrowProps {
   tokenAddress: string;
   decimals: number;
   maxAmount: number;
   symbol: string;
+  borrowApy: number;
+  healthFactor: number;
 }
 
 export const Borrow: FC<BorrowProps> = ({
@@ -21,6 +23,8 @@ export const Borrow: FC<BorrowProps> = ({
   decimals,
   maxAmount,
   symbol,
+  borrowApy,
+  healthFactor
 }) => {
   const [amount, setAmount] = useState("");
   const queryClient = useQueryClient();
@@ -113,14 +117,14 @@ export const Borrow: FC<BorrowProps> = ({
           <h5 className="text-sm font-light opacity-75 text-white">
             Borrow&nbsp;APY
           </h5>
-          <h5 className="text-sm font-light opacity-75 text-white">33.84</h5>
+          <h5 className="text-sm font-light opacity-75 text-white">{borrowApy ? borrowApy.toFixed(2) : 0} %</h5>
         </span>
 
         <span className="flex justify-between">
           <h5 className="text-sm font-light opacity-75 text-white">
             Health&nbsp;Factor
           </h5>
-          <h5 className="text-sm font-light opacity-75 text-[#66FF00]">∞</h5>
+          <h5 className="text-sm font-light opacity-75 text-[#66FF00]">{healthFactor ? healthFactor.toFixed(2) : "∞"}</h5>
         </span>
       </div>
 

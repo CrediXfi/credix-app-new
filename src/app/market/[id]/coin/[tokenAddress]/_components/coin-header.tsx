@@ -83,7 +83,7 @@ export default function CoinHeader({
         <div className="col-span-full xl:col-span-2 space-y-6">
           <Section title="Collateral/Supply Info">
             {totalBorrowed && (
-              <InfoCard title="Total Borrowed" value={`$${totalBorrowed}`}>
+              <InfoCard title="Total Supplied" value={`$${totalBorrowed}`}>
                 <Badge text={totalBorrowed} />
               </InfoCard>
             )}

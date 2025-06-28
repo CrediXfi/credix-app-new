@@ -11,7 +11,7 @@ export function WalletNotConnected() {
                 Wallet not connected
               </h2>
               <p className="text-white opacity-70 mb-6 text-base font-light leading-6">
-                Connect your wallet trade on Zerolend
+                Connect your wallet to use Credix Market
               </p>
 
               <button className="bg-white hover:bg-gray-300 text-black transition  font-medium py-2 px-6 rounded flex items-center justify-center gap-2">

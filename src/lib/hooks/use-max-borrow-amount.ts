@@ -1,4 +1,4 @@
-// src/lib/hooks/useMaxBorrowAmount.ts
+// src/lib/hooks/use-max-borrow-amount.ts
 import { useState, useEffect } from "react";
 import { useAccount, usePublicClient } from "wagmi";
 import { formatUnits } from "viem";
@@ -28,6 +28,13 @@ export const useMaxBorrowAmount = (
 
             try {
                 // 1. User borrowing power
+                // Returns:  totalCollateralBase uint256, totalDebtBase uint256, availableBorrowsBase uint256, currentLiquidationThreshold uint256, ltv uint256, healthFactor uint256
+                // totalCollateralBase - 8 decimals
+                // totalDebtBase - 8 decimals
+                // availableBorrowsBase - 8 decimals
+                // currentLiquidationThreshold - 4 decimals
+                // ltv - 4 decimals
+                // healthFactor - 18 decimals
                 const userAccountData =
                     await publicClient.readContract({
                         address: poolProxy,
@@ -35,7 +42,7 @@ export const useMaxBorrowAmount = (
                         functionName: "getUserAccountData",
                         args: [address],
                     });
-                const availableBorrowsBase = userAccountData[2]; // 8 decimals
+                const availableBorrowsBase = userAccountData[2];
 
                 // 2. Oracle price from UI data provider
                 const [reservesArray, baseCurrencyData] =
@@ -59,9 +66,6 @@ export const useMaxBorrowAmount = (
                 // 4. Compute max borrowable
                 const maxFromBorrow = (availableBorrows * BigInt(10 ** decimals)) / price;
 
-                // const baseLTVasCollateral = reserve.baseLTVasCollateral;
-                // const availableLiquidityBaseLTV = (availableLiquidity * baseLTVasCollateral) / BigInt(10000); // TODO: Change this back to just `availableLiquidity` later when liquidity becomes high
-
                 // NOTE: The user can borrow the `maxFromBorrow`. But if the reserve doesn't have enough liquidity then borrow only the available liquidity
                 const max =
                     maxFromBorrow < availableLiquidity
@@ -69,6 +73,14 @@ export const useMaxBorrowAmount = (
                         : availableLiquidity;
 
                 setMaxAmount(parseFloat(formatUnits(max, decimals)));
+                console.log("userAccountData:", userAccountData);
+                console.log("availableBorrowsBase:", availableBorrowsBase);
+                console.log("healthFactor:", userAccountData[5]);
+                console.log("reserve:", reserve);
+                console.log("priceInMarketReferenceCurrency:", priceInMarketReferenceCurrency);
+                console.log("maxFromBorrow:", maxFromBorrow);
+                console.log("availableLiquidity:", availableLiquidity);
+                console.log("max:", max);
             } catch (err) {
                 console.error(err);
                 setMaxAmount(0);

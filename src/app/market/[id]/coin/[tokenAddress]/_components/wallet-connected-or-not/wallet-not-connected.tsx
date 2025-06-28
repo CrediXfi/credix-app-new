@@ -20,7 +20,7 @@ export function WalletNotConnected() {
         Wallet not connected
       </h2>
       <p className="text-white opacity-70 mb-6 text-base font-light leading-6 text-center">
-        Connect your wallet to trade on Zerolend
+        Connect your wallet to use Credix Market
       </p>
       <button
         onClick={handleConnect}

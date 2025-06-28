@@ -65,7 +65,7 @@ export function MarketAssetsTable() {
       const price = r.underlyingPrice;
       const suppliedUsd = avail * price; // TODO: Getting the actual value in USD (for the table and not the heading)
 
-      const totalBorrow = r.totalPrincipalStableDebt + r.totalScaledVariableDebt;
+      const totalBorrow = (r.totalPrincipalStableDebt + r.totalScaledVariableDebt) * price;
       return {
         id: String(idx + 1),
         address: r.underlyingAsset.toLowerCase(),

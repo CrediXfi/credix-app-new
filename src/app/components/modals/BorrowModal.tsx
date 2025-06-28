@@ -7,7 +7,7 @@ import { useQueryClient } from "@tanstack/react-query";
 import { ToolTipIcon } from "@/app/components/atom/icons/market/tooltip";
 import USDXLInput from "@/app/components/input";
 import { useBorrow } from "@/lib/hooks/use-borrow";
-import { useMaxBorrowAmount } from "@/lib/hooks/useMaxBorrowAmount";
+import { useMaxBorrowAmount } from "@/lib/hooks/use-max-borrow-amount";
 
 export interface BorrowModalProps {
   open: boolean;

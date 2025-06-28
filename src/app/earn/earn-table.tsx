@@ -42,7 +42,7 @@ export function EarnTable() {
         icon: `/tokens/${r.symbol.toLowerCase()}.svg`,
         suppliedUsd,
         supplyApy: r.supplyApy,
-        borrowed: r.totalPrincipalStableDebt + r.totalScaledVariableDebt,
+        borrowed: (r.totalPrincipalStableDebt + r.totalScaledVariableDebt) * r.underlyingPrice,
         borrowApy: r.borrowApy,
       };
     }), [reserves]
