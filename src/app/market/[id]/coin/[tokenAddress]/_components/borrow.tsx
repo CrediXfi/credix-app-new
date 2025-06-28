@@ -7,6 +7,7 @@ import { FuelIcon } from "@/app/components/atom/icons/market/fuel";
 import { ToolTipIcon } from "@/app/components/atom/icons/market/tooltip";
 import USDXLInput from "../../../../../components/input";
 import { useBorrow } from "@/lib/hooks/use-borrow";
+import { useMaxBorrowAmount } from "@/lib/hooks/useMaxBorrowAmount";
 
 export interface BorrowProps {
   tokenAddress: string;
@@ -33,6 +34,8 @@ export const Borrow: FC<BorrowProps> = ({
   });
   const walletBalance =
     balanceData?.value ? Number(balanceData.value) / 10 ** decimals : 0;
+
+  const maxBorrowable = useMaxBorrowAmount(tokenAddress as `0x${string}`, decimals);
 
   /* borrow-хук */
   const { mutate: borrow, isPending, isSuccess, error } = useBorrow({
@@ -75,7 +78,7 @@ export const Borrow: FC<BorrowProps> = ({
       <div className="mt-2 flex items-center justify-between">
         <p className="text-xs font-light text-[#935ABD]">
           Available&nbsp;
-          {walletBalance.toLocaleString(undefined, { maximumFractionDigits: 4 })}{" "}
+          {maxBorrowable.toLocaleString(undefined, { maximumFractionDigits: decimals })}{" "}
           {symbol}
         </p>
 
@@ -84,7 +87,7 @@ export const Borrow: FC<BorrowProps> = ({
             onClick={() =>
               setAmount(
                 String(
-                  (walletBalance / 2).toFixed(decimals > 4 ? 4 : decimals),
+                  (maxBorrowable / 2).toFixed(decimals > 4 ? 4 : decimals),
                 ),
               )
             }
@@ -94,7 +97,7 @@ export const Borrow: FC<BorrowProps> = ({
           </span>
           <span
             onClick={() => {
-              const max = (Math.floor(walletBalance * 10 ** (decimals > 4 ? 4 : decimals)) / 10 ** (decimals > 4 ? 4 : decimals)).toString();
+              const max = (Math.floor(maxBorrowable * 10 ** (decimals > 4 ? 4 : decimals)) / 10 ** (decimals > 4 ? 4 : decimals)).toString();
               setAmount(max);
             }}
             className="cursor-pointer rounded-[2px] bg-[#935ABD] py-1 px-2 text-xs font-medium text-white"

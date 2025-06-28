@@ -7,6 +7,7 @@ import { useQueryClient } from "@tanstack/react-query";
 import { ToolTipIcon } from "@/app/components/atom/icons/market/tooltip";
 import USDXLInput from "@/app/components/input";
 import { useBorrow } from "@/lib/hooks/use-borrow";
+import { useMaxBorrowAmount } from "@/lib/hooks/useMaxBorrowAmount";
 
 export interface BorrowModalProps {
   open: boolean;
@@ -32,9 +33,12 @@ export const BorrowModal: FC<BorrowModalProps> = ({
     token: tokenAddress as `0x${string}`,
     chainId: 146,
   });
+  // getMaxAmountAvailableToBorrow
   const walletBalance = balanceData?.value
     ? Number(balanceData.value) / 10 ** decimals
     : 0;
+
+  const maxBorrowable = useMaxBorrowAmount(tokenAddress as `0x${string}`, decimals);
 
   const { mutate: borrow, isPending, isSuccess, error } = useBorrow({
     tokenAddress: tokenAddress as `0x${string}`,
@@ -67,8 +71,8 @@ export const BorrowModal: FC<BorrowModalProps> = ({
         <h2 className="text-lg font-semibold mb-4">Borrow {symbol}</h2>
         <form onSubmit={handleSubmit} className="space-y-4">
           <p className="text-white opacity-75 text-base font-light leading-6">
-            Wallet balance:{" "}
-            {walletBalance.toLocaleString(undefined, {
+            Available:{" "}
+            {maxBorrowable.toLocaleString(undefined, {
               maximumFractionDigits: decimals,
             })}{" "}
             {symbol}
@@ -80,7 +84,7 @@ export const BorrowModal: FC<BorrowModalProps> = ({
           <USDXLInput
             value={amount}
             onChange={setAmount}
-            max={walletBalance}
+            max={maxBorrowable}
             symbol={symbol}
           />
 
@@ -89,7 +93,7 @@ export const BorrowModal: FC<BorrowModalProps> = ({
               type="button"
               onClick={() =>
                 setAmount(
-                  (walletBalance / 2).toFixed(decimals > 4 ? 4 : decimals)
+                  (maxBorrowable / 2).toFixed(decimals > 4 ? 4 : decimals)
                 )
               }
               className="cursor-pointer rounded-[2px] bg-[#935ABD] py-1 px-2 text-xs font-medium"
@@ -99,7 +103,7 @@ export const BorrowModal: FC<BorrowModalProps> = ({
             <button
               type="button"
               onClick={() => {
-                const max = (Math.floor(walletBalance * 10 ** (decimals > 4 ? 4 : decimals)) / 10 ** (decimals > 4 ? 4 : decimals)).toString();
+                const max = (Math.floor(maxBorrowable * 10 ** (decimals > 4 ? 4 : decimals)) / 10 ** (decimals > 4 ? 4 : decimals)).toString();
                 setAmount(max);
               }}
               className="cursor-pointer rounded-[2px] bg-[#935ABD] py-1 px-2 text-xs font-medium"
