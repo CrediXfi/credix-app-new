@@ -124,7 +124,7 @@ export const Borrow: FC<BorrowProps> = ({
           <h5 className="text-sm font-light opacity-75 text-white">
             Health&nbsp;Factor
           </h5>
-          <h5 className="text-sm font-light opacity-75 text-[#66FF00]">{healthFactor ? healthFactor.toFixed(2) : "∞"}</h5>
+          <h5 className="text-sm font-light opacity-75 text-[#66FF00]">{healthFactor > 1e10 ? "∞" : healthFactor.toFixed(2)}</h5>
         </span>
       </div>
 
