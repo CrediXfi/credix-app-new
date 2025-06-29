@@ -35,14 +35,16 @@ export function EarnTable() {
   // Подготовим данные для таблицы: теперь suppliedUsd = availableLiquidity * underlyingPrice
   const tableData = React.useMemo<TableRow[]>(() =>
     reserves.map((r) => {
-      const suppliedUsd = r.availableLiquidity * r.underlyingPrice;
+      const availableLiquidityUsd = r.availableLiquidity * r.underlyingPrice;
+      const borrowedUsd = (r.totalPrincipalStableDebt + r.totalScaledVariableDebt) * r.underlyingPrice;
+      const suppliedUsd = availableLiquidityUsd + borrowedUsd;
       return {
         underlyingAsset: r.underlyingAsset,
         symbol: r.symbol,
         icon: `/tokens/${r.symbol.toLowerCase()}.svg`,
         suppliedUsd,
         supplyApy: r.supplyApy,
-        borrowed: (r.totalPrincipalStableDebt + r.totalScaledVariableDebt) * r.underlyingPrice,
+        borrowed: borrowedUsd,
         borrowApy: r.borrowApy,
       };
     }), [reserves]

@@ -53,7 +53,7 @@ export const useMaxBorrowAmount = (
                         args: [chainAddrs?.["PoolAddressesProvider"] as `0x${string}`],
                     });
                 const reserve = reservesArray.find(
-                    (r) => r.underlyingAsset.toLowerCase() === tokenAddress
+                    (r) => r.underlyingAsset.toLowerCase() === tokenAddress.toLowerCase()
                 );
                 if (!reserve) throw new Error("Token not found in reserve data");
                 const priceInMarketReferenceCurrency = reserve.priceInMarketReferenceCurrency;

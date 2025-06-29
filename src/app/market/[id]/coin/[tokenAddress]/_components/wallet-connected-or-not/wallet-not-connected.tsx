@@ -2,6 +2,7 @@
 
 import { WalletConnectionIcon } from "@/app/components/atom/icons/wallet-connection";
 import { useConnect } from "wagmi";
+import { ConnectButton } from '@rainbow-me/rainbowkit';
 
 export function WalletNotConnected() {
   const { connect, connectors, status } = useConnect();
@@ -22,7 +23,7 @@ export function WalletNotConnected() {
       <p className="text-white opacity-70 mb-6 text-base font-light leading-6 text-center">
         Connect your wallet to use Credix Market
       </p>
-      <button
+      {/* <button
         onClick={handleConnect}
         disabled={isConnecting}
         className="bg-white text-black flex items-center justify-center gap-2 font-medium py-2 px-4 hover:bg-opacity-90 rounded text-sm"
@@ -31,7 +32,58 @@ export function WalletNotConnected() {
           ? `Connecting to ${connectorName}…`
           : "Connect Wallet"}
         <WalletConnectionIcon className="size-[14px]" />
-      </button>
+      </button> */}
+
+      <ConnectButton.Custom>
+        {({
+          account,
+          chain,
+          openAccountModal,
+          openChainModal,
+          openConnectModal,
+          authenticationStatus,
+          mounted,
+        }) => {
+          // Можно настроить кастомную логику видимости (например, не показывать, если SSR)
+          const ready = mounted && authenticationStatus !== 'loading';
+          const connected = ready && account && chain && (!authenticationStatus || authenticationStatus === 'authenticated');
+
+          return (
+            <div>
+              {!connected ? (
+                // Кнопка "Connect Wallet"
+                <button
+                  onClick={openConnectModal}
+                  type="button"
+                  className="bg-gradient-to-b group from-[#855ECA] flex items-center justify-center gap-2 to-[#B59DDE] text-white font-medium py-2 px-4 rounded relative overflow-hidden text-sm"
+                >
+                  <span className="absolute top-0 left-0 w-full h-full bg-black opacity-0 duration-150 group-hover:opacity-10" />
+                  Connect Wallet
+                  <WalletConnectionIcon className="size-[14px]" />
+                </button>
+              ) : chain.unsupported ? (
+                // Кнопка "Switch Network"
+                <button
+                  onClick={openChainModal}
+                  type="button"
+                  className="bg-red-600 text-white px-3 py-2 rounded font-semibold text-sm"
+                >
+                  Wrong network
+                </button>
+              ) : (
+                // Кнопка-адрес (и можно добавить ещё функционал!)
+                <button
+                  onClick={openAccountModal}
+                  type="button"
+                  className="text-white text-sm bg-[#8748FF] px-3 py-2 rounded font-semibold"
+                >
+                  {account.displayName}
+                </button>
+              )}
+            </div>
+          );
+        }}
+      </ConnectButton.Custom>
     </div>
   );
 }

@@ -72,7 +72,7 @@ export function MarketAssetsTable() {
         icon: `/tokens/${r.symbol.toLowerCase()}.svg`,
         symbol: r.symbol,
         availableLiquidity: avail,
-        supply: fmtUsd(suppliedUsd),
+        supply: fmtUsd(suppliedUsd + totalBorrow),
         supplyAPY: fmtPct(r.supplyApy),
         borrowedAmount: totalBorrow,
         borrowed: fmtUsd(totalBorrow),
@@ -280,6 +280,7 @@ export function MarketAssetsTable() {
       {/* Mobile View */}
       <div className="md:hidden mb-5 space-y-3">
         {tableData.map((market) => {
+          // TODO: Mobile View
           /* …mobile layout… */
           return <div key={market.id}>{/* … */}</div>;
         })}

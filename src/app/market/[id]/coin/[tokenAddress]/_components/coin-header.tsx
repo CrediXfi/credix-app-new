@@ -46,6 +46,7 @@ export default function CoinHeader({
   borrowApy,
 }: Props) {
   const { isConnected } = useAccount();
+  const totalSupplied = Number(availableLiquidity) + Number(totalBorrowed);
 
   return (
     <div className="w-full space-y-6">
@@ -82,9 +83,9 @@ export default function CoinHeader({
       <div className="grid grid-cols-3 gap-6">
         <div className="col-span-full xl:col-span-2 space-y-6">
           <Section title="Collateral/Supply Info">
-            {totalBorrowed && (
-              <InfoCard title="Total Supplied" value={`$${totalBorrowed}`}>
-                <Badge text={totalBorrowed} />
+            {totalSupplied && (
+              <InfoCard title="Total Supplied" value={`$${totalSupplied.toFixed(2)}`}>
+                <Badge text={totalSupplied.toFixed(2)} />
               </InfoCard>
             )}
             {supplyCap && (
